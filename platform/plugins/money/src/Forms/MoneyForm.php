@@ -25,6 +25,16 @@ class MoneyForm extends FormAbstract
                 'attr'       => [
                     'placeholder'  => trans('core/base::forms.name_placeholder'),
                     'data-counter' => 120,
+                    'disabled' => true
+                ],
+            ])
+            ->add('money', 'text', [
+                'label'      => "Tiền",
+                'label_attr' => ['class' => 'control-label required'],
+                'attr'       => [
+                    'placeholder'  => trans('core/base::forms.name_placeholder'),
+                    'data-counter' => 120,
+                    'disabled' => true
                 ],
             ])
             ->add('status', 'customSelect', [
@@ -33,7 +43,10 @@ class MoneyForm extends FormAbstract
                 'attr'       => [
                     'class' => 'form-control select-full',
                 ],
-                'choices'    => BaseStatusEnum::labels(),
+                'choices'    => [
+                    '1' => 'Chờ xét duyệt',
+                    '2' => 'Thành công'
+                ],
             ])
             ->setBreakFieldPoint('status');
     }

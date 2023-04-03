@@ -62,7 +62,7 @@ class MoneyTable extends TableAbstract
                 return BaseHelper::formatDate($item->created_at);
             })
             ->editColumn('status', function ($item) {
-                return $item->status->toHtml();
+                return $item->status == '1' ? "Chờ xét duyệt" : "Thành công";
             })
             ->addColumn('operations', function ($item) {
                 return $this->getOperations('money.edit', 'money.destroy', $item);
@@ -150,12 +150,6 @@ class MoneyTable extends TableAbstract
                 'title'    => trans('core/base::tables.name'),
                 'type'     => 'text',
                 'validate' => 'required|max:120',
-            ],
-            'status' => [
-                'title'    => trans('core/base::tables.status'),
-                'type'     => 'select',
-                'choices'  => BaseStatusEnum::labels(),
-                'validate' => 'required|in:' . implode(',', BaseStatusEnum::values()),
             ],
             'created_at' => [
                 'title' => trans('core/base::tables.created_at'),

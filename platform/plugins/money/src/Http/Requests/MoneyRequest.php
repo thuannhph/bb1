@@ -18,7 +18,6 @@ class MoneyRequest extends Request
     {
         return [
             'name'   => 'required',
-            'status' => Rule::in(BaseStatusEnum::values()),
         ];
     }
 }

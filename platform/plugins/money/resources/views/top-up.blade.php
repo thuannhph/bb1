@@ -14,6 +14,7 @@
                         <input type="text" value="{{ auth('member')->user()->id }}" hidden name="user_id">
                         <input type="text" value="{{ auth('member')->user()->username }}" hidden name="name">
                         <input type="text" value="2" hidden name="type">
+                        <input type="text" value="1" hidden name="status">
                         <div class="form-group">
                             <label>Amount of top up</label>
                             <input type="text" id="money" class="form-control num-top-up {{ $errors->has('money') ? ' is-invalid' : '' }}" placeholder="" name="money">
@@ -49,7 +50,7 @@
                 <div class="row col-mar-5">
                     <div class="col-md-6">
                         <div class="box-pay">
-                            <button class="btn-num" style="width:100%">
+                            <button style="width:100%">
                                 <h4 class="title"><i class="fas fa-money-check"></i>Contact Customer Service</h4>
                             </button>
                             <p>BIDV</p>
