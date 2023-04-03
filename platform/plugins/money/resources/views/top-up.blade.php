@@ -66,15 +66,13 @@
     window.onload = function() {
         var anchors = document.getElementsByClassName("btn-num");
         for(var i = 0; i < anchors.length; i++) {
-                var anchor = anchors[i];
-                anchor.onclick = function() {
-                    var fired_button = this.getAttribute('value');
-                    document.getElementById("money").value = fired_button;
-                }
+            var anchor = anchors[i];
+            anchor.onclick = function() {
+                var fired_button = this.getAttribute('value');
+                document.getElementById("money").value = fired_button;
             }
+        }
     }
-            
-    
 </script>
 @push('scripts')
   <script type="text/javascript" src="{{ asset('js/jquery.js')}}"></script>
