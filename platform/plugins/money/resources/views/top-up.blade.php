@@ -16,7 +16,7 @@
                         <input type="text" value="2" hidden name="type">
                         <div class="form-group">
                             <label>Amount of top up</label>
-                            <input type="text" class="form-control num-top-up {{ $errors->has('money') ? ' is-invalid' : '' }}" placeholder="" name="money">
+                            <input type="text" id="money" class="form-control num-top-up {{ $errors->has('money') ? ' is-invalid' : '' }}" placeholder="" name="money">
                             @if ($errors->has('money'))
                             <span class="invalid-feedback">
                                 <strong>{{ $errors->first('money') }}</strong>
@@ -62,7 +62,20 @@
         </form>
     </div>
 </div>
-
+<script>
+    window.onload = function() {
+        var anchors = document.getElementsByClassName("btn-num");
+        for(var i = 0; i < anchors.length; i++) {
+                var anchor = anchors[i];
+                anchor.onclick = function() {
+                    var fired_button = this.getAttribute('value');
+                    document.getElementById("money").value = fired_button;
+                }
+            }
+    }
+            
+    
+</script>
 @push('scripts')
   <script type="text/javascript" src="{{ asset('js/jquery.js')}}"></script>
   <script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
