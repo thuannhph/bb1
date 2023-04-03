@@ -241,6 +241,7 @@ class RegisterController extends Controller
             'email' => '',
             'username' => $data['username'],
             'phone'  => $data['phone'],
+            'level_vip' => 1,
             'password'   => bcrypt($data['password']),
             'fund_password'  => bcrypt($data['fund_password']),
             'invitation_code'  => $uuid,
