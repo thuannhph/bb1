@@ -3,6 +3,27 @@
     $featured = get_products();
 ?>
 <div class="wrap">
+    <div class="modal fade md-order" id="md-order" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="wrap-md-order">
+                        <div class="top">
+                            <div class="ct">
+                                <div class="cate">1</div>
+                                <h3 class="head">2$</h3>
+                            </div>
+                            <div class="img">
+                                <img src="" alt="">
+                            </div>
+                        </div>
+                        <button class="btn-order">Order</button>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="ptt"></div>
     <section class="page-order">
         <div class="container">
@@ -10,7 +31,7 @@
                 <div class="banner">
                     <img src="images/order-banner.png" alt="">
                 </div>
-                <a href="javascript:;" title="" class="btn-order">take orders</a>
+                    <a href="javascript:;" title="" id="take_orders" class="btn-order" data-toggle="modal" data-target="#md-order">take orders</a>
                 <div class="content">
                     <div class="item-order">
                         <span class="ic"><img src="images/ic-order1.png" alt=""></span>
@@ -72,11 +93,45 @@
         </div>
     </div>
 </div>
-@push('scripts')
-  <script type="text/javascript" src="{{ asset('js/jquery.js')}}"></script>
-  <script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
-  <script type="text/javascript" src="{{ asset('js/slick.min.js')}}"></script>
-  <script type="text/javascript" src="{{ asset('js/scrollspy.js')}}"></script>
-  <script type="text/javascript" src="{{ asset('js/scrollspy.js')}}"></script>
-  <script type="text/javascript" src="{{ asset('vendor/core/core/js-validation/js/js-validation.js')}}"></script>
-@endpush
+
+<script type="text/javascript" src="{{ asset('js/jquery.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/slick.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/scrollspy.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/scrollspy.js')}}"></script>
+<script>
+    $("#take_orders").click(function(){
+       
+        $.ajax({
+            type: 'GET',
+            dataType : 'json',
+            url: "{{route("random_products")}}",
+            headers:{         
+                'Authorization' : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBWZXIiOiIwLjAuMCIsImV4cCI6NDcyNjM4OTEyMiwibG9jYWxlIjoiIiwibWFzdGVyVmVyIjoiIiwicGxhdGZvcm0iOiIiLCJwbGF0Zm9ybVZlciI6IiIsInVzZXJJZCI6IiJ9.QIZbmB5_9Xlap_gDhjETfMI6EAmR15yBtIQkWFWJkrg',
+            },
+            success: function (data, status, xhr) {
+                console.log('data', data.name);
+                $('#md-order').html(`
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="wrap-md-order">
+                                <div class="top">
+                                    <div class="ct">
+                                        <div class="cate">${ data.name }</div>
+                                        <h3 class="head">${ data.price }$</h3>
+                                    </div>
+                                    <div class="img">
+                                        <img src="${ data.image }" alt="">
+                                    </div>
+                                </div>
+                                <button class="btn-order">Order</button>  
+                            </div>
+                        </div>
+                    </div>
+                </div>`)
+            }
+        });
+    });
+    
+</script>

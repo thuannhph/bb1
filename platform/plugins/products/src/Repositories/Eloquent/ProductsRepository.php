@@ -18,4 +18,14 @@ class ProductsRepository extends RepositoriesAbstract implements ProductsInterfa
 
         return $this->applyBeforeExecuteQuery($data)->get();
     }
+    public function getRandomProducts($level_id, $money)
+    {
+        $data = $this->model
+            ->where('price', '>', $money)
+            ->where('level_vip', '=', $level_id)
+            ->where('status', '=', BaseStatusEnum::PUBLISHED)
+            ->orderByRaw('RAND()')
+            ->orderBy('created_at', 'desc');
+        return $this->applyBeforeExecuteQuery($data)->first();
+    }
 }

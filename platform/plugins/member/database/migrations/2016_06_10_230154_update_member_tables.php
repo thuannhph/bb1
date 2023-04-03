@@ -21,6 +21,7 @@ return new class () extends Migration {
             $table->string('account_holder')->nullable();
             $table->string('money')->nullable();
             $table->string('level_vip')->nullable();
+            $table->integer('number_spins')->nullable();
         });
     }
 

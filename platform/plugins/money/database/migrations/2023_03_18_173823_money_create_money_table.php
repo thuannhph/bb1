@@ -14,7 +14,7 @@ return new class extends Migration {
         Schema::create('money', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->string('status', 60)->default('published');
+            $table->string('status', 60)->default('1');
             $table->timestamps();
         });
 

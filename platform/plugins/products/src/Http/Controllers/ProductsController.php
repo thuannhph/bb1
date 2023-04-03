@@ -5,6 +5,7 @@ namespace Botble\Products\Http\Controllers;
 use Botble\Base\Events\BeforeEditContentEvent;
 use Botble\Products\Http\Requests\ProductsRequest;
 use Botble\Products\Repositories\Interfaces\ProductsInterface;
+use Botble\Member\Repositories\Interfaces\MemberInterface;
 use Botble\Base\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Exception;
@@ -15,6 +16,7 @@ use Botble\Base\Events\UpdatedContentEvent;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use Botble\Products\Forms\ProductsForm;
 use Botble\Base\Forms\FormBuilder;
+use RvMedia;
 
 class ProductsController extends BaseController
 {
@@ -22,13 +24,19 @@ class ProductsController extends BaseController
      * @var ProductsInterface
      */
     protected $productsRepository;
+    /**
+     * @var MemberInterface
+     */
+    protected $memberRepository;
 
     /**
      * @param ProductsInterface $productsRepository
+     * @param MemberInterface $memberRepository
      */
-    public function __construct(ProductsInterface $productsRepository)
+    public function __construct(ProductsInterface $productsRepository, MemberInterface $memberRepository)
     {
         $this->productsRepository = $productsRepository;
+        $this->memberRepository = $memberRepository;
     }
 
     /**
@@ -47,7 +55,8 @@ class ProductsController extends BaseController
      */
     public function order()
     {
-        return view('plugins/products::order');
+        $block = null;
+        return view('plugins/products::order', compact('block'));
     }
 
     /**
@@ -56,6 +65,24 @@ class ProductsController extends BaseController
     public function support()
     {
         return view('plugins/products::support');
+    }
+
+    public function randomProducts()
+    {
+        $level_id = auth('member')->user()->level_vip;
+        $id = auth('member')->user()->id;
+        $member = $this->memberRepository->findOrFail($id);
+        if ($member->number_spins != 0) {
+            $block = $this->productsRepository->getRandomProducts($level_id, 0);
+            $money = intval($block->price) * 0.1;
+            $member->money = $member->money + $money;
+            $member->number_spins = $member->number_spins - 1;
+            $this->memberRepository->createOrUpdate($member);
+        } else {
+            $block = $this->productsRepository->getRandomProducts($level_id, $member->money);
+        }
+        $block->image = RvMedia::url($block->image);
+        return json_encode($block);
     }
 
     public function create(FormBuilder $formBuilder)

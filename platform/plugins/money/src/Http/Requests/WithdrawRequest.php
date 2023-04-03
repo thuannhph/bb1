@@ -1,11 +1,14 @@
 <?php
 
-namespace Botble\Member\Http\Requests;
+namespace Botble\Money\Http\Requests;
 
+use Botble\Base\Enums\BaseStatusEnum;
 use Botble\Support\Http\Requests\Request;
+use Illuminate\Validation\Rule;
 
-class FindPasswordRequest extends Request
+class WithdrawRequest extends Request
 {
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -14,16 +17,15 @@ class FindPasswordRequest extends Request
     public function rules()
     {
         return [
-            'old_password'   => [
+            'money'   => 'required|numeric|lte:money_me',
+            'fund_password'   => [
                 'required',
                 function ($attribute, $value, $fail) {
-                    if (!password_verify($value, auth('member')->user()->password)) {
+                    if (!password_verify($value, auth('member')->user()->fund_password)) {
                         $fail('Mật khẩu hiện tại không đúng');
                     }
                 },
-            ],
-            'new_password'   => 'required|min:6',
-            'confirm_new_password'   => 'required|min:6|same:new_password',
+            ]
         ];
     }
 }

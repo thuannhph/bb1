@@ -132,32 +132,22 @@ class MemberController extends BaseController
 
     public function findPassword(FindPasswordRequest $request, BaseHttpResponse $response)
     {
-        if(password_verify($request->input('old_password'), auth('member')->user()->password)) {
-            $id = auth('member')->user()->id;
-            $member = $this->memberRepository->findOrFail($id);
-            $member->password = bcrypt($request->input('new_password'));
-            $member = $this->memberRepository->createOrUpdate($member);
-            return $response
+        $id = auth('member')->user()->id;
+        $member = $this->memberRepository->findOrFail($id);
+        $member->password = bcrypt($request->input('new_password'));
+        $member = $this->memberRepository->createOrUpdate($member);
+        return $response
             ->setMessage(trans('core/base::notices.create_success_message'));
-        } else {
-            return;
-        }
-        
     }
 
     public function fundPassword(FundPasswordRequest $request, BaseHttpResponse $response)
     {
-        if(password_verify($request->input('old_password'), auth('member')->user()->fund_password)) {
-            $id = auth('member')->user()->id;
-            $member = $this->memberRepository->findOrFail($id);
-            $member->fund_password = bcrypt($request->input('new_password'));
-            $member = $this->memberRepository->createOrUpdate($member);
-            return $response
+        $id = auth('member')->user()->id;
+        $member = $this->memberRepository->findOrFail($id);
+        $member->fund_password = bcrypt($request->input('new_password'));
+        $member = $this->memberRepository->createOrUpdate($member);
+        return $response
             ->setMessage(trans('core/base::notices.create_success_message'));
-        } else {
-            return;
-        }
-        
     }
 
     public function addCard(MemberBankRequest $request, BaseHttpResponse $response)

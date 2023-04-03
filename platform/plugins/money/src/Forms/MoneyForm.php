@@ -45,7 +45,8 @@ class MoneyForm extends FormAbstract
                 ],
                 'choices'    => [
                     '1' => 'Chờ xét duyệt',
-                    '2' => 'Thành công'
+                    '2' => 'Thành công',
+                    '3' => 'Đóng băng'
                 ],
             ])
             ->setBreakFieldPoint('status');

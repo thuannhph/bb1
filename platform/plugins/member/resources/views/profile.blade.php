@@ -17,14 +17,14 @@
                 <div class="detail-user">
                     <div class="top">
                         <div class="left">
-                            <h3 class="count">$0.00</h3>
+                            <h3 class="count">${{ auth('member')->user()->money }}</h3>
                             <div class="desc">Account Balance</div>
                         </div>
-                        <button type="submit" class="btn-plus"><a href="/add-card" title="" class="item"><i class="fal fa-plus"></i></a></button>
+                        <button type="submit" class="btn-plus"><a href="/top-up" title="" class="item"><i class="fal fa-plus"></i></a></button>
                     </div>
                     <div class="btn-bottom">
                         <a href="/top-up" title="" class="item">Top-up</a>
-                        <a href="/add-card" title="" class="item">Withdraw</a>
+                        <a href="/withdraw" title="" class="item">Withdraw</a>
                     </div>
                 </div>
             </div>
@@ -40,12 +40,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/top-up" title="">
+                    <a href="/top-up-record" title="">
                         <span class="ic"><i class="fas fa-layer-plus"></i></span> Top-up Record
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:;" title="">
+                    <a href="/withdraw-record" title="">
                         <span class="ic"><i class="fas fa-layer-minus"></i></span> Withdraw Record
                     </a>
                 </li>

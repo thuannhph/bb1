@@ -11,4 +11,9 @@ class ProductsCacheDecorator extends CacheAbstractDecorator implements ProductsI
     {
         return $this->getDataIfExistCache(__FUNCTION__, func_get_args());
     }
+
+    public function getRandomProducts($level_id, $money)
+    {
+        return $this->getDataIfExistCache(__FUNCTION__, func_get_args());
+    }
 }

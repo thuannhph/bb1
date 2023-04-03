@@ -21,28 +21,12 @@ class MemberForm extends FormAbstract
             ->setupModel(new Member())
             ->setValidatorClass(MemberCreateRequest::class)
             ->withCustomFields()
-            ->add('first_name', 'text', [
-                'label'      => trans('plugins/member::member.first_name'),
+            ->add('username', 'text', [
+                'label'      => "username",
                 'label_attr' => ['class' => 'control-label required'],
                 'attr'       => [
                     'placeholder'  => trans('core/base::forms.name_placeholder'),
                     'data-counter' => 120,
-                ],
-            ])
-            ->add('last_name', 'text', [
-                'label'      => trans('plugins/member::member.last_name'),
-                'label_attr' => ['class' => 'control-label required'],
-                'attr'       => [
-                    'placeholder'  => trans('core/base::forms.name_placeholder'),
-                    'data-counter' => 120,
-                ],
-            ])
-            ->add('email', 'text', [
-                'label'      => trans('plugins/member::member.form.email'),
-                'label_attr' => ['class' => 'control-label required'],
-                'attr'       => [
-                    'placeholder'  => trans('plugins/member::member.email_placeholder'),
-                    'data-counter' => 60,
                 ],
             ])
             ->add('phone', 'text', [
@@ -53,21 +37,12 @@ class MemberForm extends FormAbstract
                     'data-counter' => 20,
                 ],
             ])
-            ->add('dob', 'date', [
-                'label'      => trans('plugins/member::member.dob'),
+            ->add('number_spins', 'number', [
+                'label'      => "number spins",
                 'label_attr' => ['class' => 'control-label'],
                 'attr'       => [
-                    'data-date-format' => config('core.base.general.date_format.js.date'),
-                ],
-                'default_value' => BaseHelper::formatDate(now()),
-            ])
-            ->add('description', 'textarea', [
-                'label'      => trans('core/base::forms.description'),
-                'label_attr' => ['class' => 'control-label'],
-                'attr'       => [
-                    'rows'         => 4,
-                    'placeholder'  => trans('core/base::forms.description_placeholder'),
-                    'data-counter' => 400,
+                    'placeholder'  => trans('plugins/member::member.phone_placeholder'),
+                    'data-counter' => 20,
                 ],
             ])
             ->add('is_change_password', 'checkbox', [

@@ -5,6 +5,7 @@ namespace Botble\Money\Http\Controllers;
 use Botble\Base\Events\BeforeEditContentEvent;
 use Botble\Money\Http\Requests\MoneyRequest;
 use Botble\Money\Http\Requests\AddCardRequest;
+use Botble\Money\Http\Requests\WithdrawRequest;
 use Botble\Money\Repositories\Interfaces\MoneyInterface;
 use Botble\Base\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
@@ -51,7 +52,38 @@ class MoneyController extends BaseController
         return view('plugins/money::top-up');
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public function withdraw()
+    {
+        return view('plugins/money::withdraw');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function topUpRecord()
+    {
+        return view('plugins/money::top-up-record');
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function withdrawRecord()
+    {
+        return view('plugins/money::withdraw-record');
+    }
+
     public function saveTopUp(AddCardRequest $request, BaseHttpResponse $response)
+    {
+        $this->moneyRepository->createOrUpdate($request->input());
+        return $response
+            ->setMessage(trans('core/base::notices.create_success_message'));
+    }
+
+    public function saveWithdraw(WithdrawRequest $request, BaseHttpResponse $response)
     {
         $this->moneyRepository->createOrUpdate($request->input());
         return $response

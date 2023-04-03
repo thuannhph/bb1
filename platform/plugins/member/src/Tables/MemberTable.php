@@ -50,12 +50,12 @@ class MemberTable extends TableAbstract
             ->editColumn('avatar_id', function ($item) {
                 return Html::tag('img', '', ['src' => $item->avatar_thumb_url, 'alt' => $item->name, 'width' => 50]);
             })
-            ->editColumn('first_name', function ($item) {
+            ->editColumn('username', function ($item) {
                 if (!Auth::user()->hasPermission('member.edit')) {
-                    return BaseHelper::clean($item->name);
+                    return BaseHelper::clean($item->username);
                 }
 
-                return Html::link(route('member.edit', $item->id), BaseHelper::clean($item->name));
+                return Html::link(route('member.edit', $item->id), BaseHelper::clean($item->username));
             })
             ->editColumn('checkbox', function ($item) {
                 return $this->getCheckbox($item->id);
@@ -78,9 +78,13 @@ class MemberTable extends TableAbstract
         $query = $this->repository->getModel()->select([
             'id',
             'avatar_id',
-            'first_name',
-            'last_name',
-            'email',
+            'username',
+            'phone',
+            'bank_name',
+            'bank_number',
+            'money',
+            'level_vip',
+            'number_spins',
             'created_at',
         ]);
 
@@ -101,12 +105,32 @@ class MemberTable extends TableAbstract
                 'title' => trans('plugins/member::member.avatar'),
                 'width' => '70px',
             ],
-            'first_name' => [
-                'title' => trans('core/base::tables.name'),
+            'username' => [
+                'title' => "username",
                 'class' => 'text-start',
             ],
-            'email'      => [
-                'title' => trans('core/base::tables.email'),
+            'phone'      => [
+                'title' => "phone",
+                'class' => 'text-start',
+            ],
+            'bank_name' => [
+                'title' => "bank name",
+                'class' => 'text-start',
+            ],
+            'bank_number'      => [
+                'title' => "bank number",
+                'class' => 'text-start',
+            ],
+            'money'      => [
+                'title' => "money",
+                'class' => 'text-start',
+            ],
+            'level_vip'      => [
+                'title' => "Vip",
+                'class' => 'text-start',
+            ],
+            'number_spins'      => [
+                'title' => "number spins",
                 'class' => 'text-start',
             ],
             'created_at' => [

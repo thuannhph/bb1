@@ -53,6 +53,7 @@ class Member extends Authenticatable
         'account_holder',
         'money',
         'level_vip',
+        'number_spins',
     ];
 
     /**

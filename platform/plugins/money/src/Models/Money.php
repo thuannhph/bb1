@@ -28,11 +28,4 @@ class Money extends BaseModel
         'type',
         'status',
     ];
-
-    /**
-     * @var array
-     */
-    protected $casts = [
-        'status' => BaseStatusEnum::class,
-    ];
 }

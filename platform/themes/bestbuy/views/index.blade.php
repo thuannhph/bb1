@@ -24,7 +24,7 @@
         </div>
         <ul class="list-menu">
             <li class="item">
-                <a href="javascript:;" title="">
+                <a href="/withdraw" title="">
                     <span class="ic"><img src="{{ RvMedia::url('image/deal.png') }}"></span>
                     <span class="title">Withdraw</span>
                 </a>

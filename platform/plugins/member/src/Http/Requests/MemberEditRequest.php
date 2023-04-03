@@ -14,9 +14,6 @@ class MemberEditRequest extends Request
     public function rules()
     {
         $rules = [
-            'first_name' => 'required|max:120|min:2',
-            'last_name'  => 'required|max:120|min:2',
-            'email'      => 'required|max:60|min:6|email|unique:members,email,' . $this->route('member'),
         ];
 
         if ($this->input('is_change_password') == 1) {

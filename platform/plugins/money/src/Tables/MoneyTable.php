@@ -62,7 +62,14 @@ class MoneyTable extends TableAbstract
                 return BaseHelper::formatDate($item->created_at);
             })
             ->editColumn('status', function ($item) {
-                return $item->status == '1' ? "Chờ xét duyệt" : "Thành công";
+                if($item->status == '1') {
+                    $text = "Chờ xét duyệt";
+                } else if($item->status == '2') {
+                    $text = "Thành công";
+                } else {
+                    $text = "Đóng băng";
+                }
+                return $text;
             })
             ->addColumn('operations', function ($item) {
                 return $this->getOperations('money.edit', 'money.destroy', $item);
